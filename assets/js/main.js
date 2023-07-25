@@ -26,6 +26,7 @@
 
 	// Play initial animations on page load.
 		$window.on('load', function() {
+			debugger;
 			window.setTimeout(function() {
 				$body.removeClass('is-preload');
 			}, 100);
@@ -334,7 +335,8 @@
 			});
 
 			$window.on('hashchange', function(event) {
-
+				console.log('CHECK ',location.hash)
+				debugger;
 				// Empty hash?
 					if (location.hash == ''
 					||	location.hash == '#') {
@@ -380,6 +382,7 @@
 
 					})
 					.on('hashchange', function() {
+						debugger;
 						$window.scrollTop(oldScrollPos);
 					});
 
@@ -395,7 +398,24 @@
 				if (location.hash != ''
 				&&	location.hash != '#')
 					$window.on('load', function() {
+						debugger;
 						$main._show(location.hash.substr(1), true);
 					});
+
+		let userSelection = document.getElementsByClassName("item-containers")
+		for(let i = 0; i < userSelection.length; i++) {
+			userSelection[i].addEventListener("click", function() {
+			  window.location = getRootUrl()+'/angular.html';
+			})
+		  }
+
+		  function getRootUrl() {
+			var defaultPorts = {"http:":80,"https:":443};
+		  
+			return window.location.protocol + "//" + window.location.hostname
+			 + (((window.location.port)
+			  && (window.location.port != defaultPorts[window.location.protocol]))
+			  ? (":"+window.location.port) : "");
+		  }
 
 })(jQuery);
